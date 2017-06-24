@@ -32,6 +32,7 @@ public class Logger {
 	
 	// Add additional mapping methods below
 	public void addHandler(Handler handler) { logger.addHandler(handler); }
+	public void setLevel(Level l) { logger.setLevel(l); }
 	
 	public boolean isInfoEnabled()  { return logger.isLoggable(Level.INFO); }
 	public boolean isErrorEnabled() { return logger.isLoggable(Level.SEVERE); }

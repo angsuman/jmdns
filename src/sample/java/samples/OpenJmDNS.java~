@@ -19,60 +19,41 @@
 package samples;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
+import java.util.logging.LogManager;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.jmdns.JmDNS;
-import javax.jmdns.ServiceEvent;
-import javax.jmdns.ServiceListener;
 
 /**
- * Sample Code for Service Discovery using JmDNS and a ServiceListener.
+ * Sample Code that opens JmDNS in debug mode.
  * <p>
- * Run the main method of this class. It listens for HTTP services and lists all changes on System.out.
+ * Run the main method of this class.
  *
  * @author Werner Randelshofer
  */
-public class DiscoverServices {
-
-    static class SampleListener implements ServiceListener {
-        @Override
-        public void serviceAdded(ServiceEvent event) {
-            System.out.println("Service added   : " + event.getName() + "." + event.getType());
-        }
-
-        @Override
-        public void serviceRemoved(ServiceEvent event) {
-            System.out.println("Service removed : " + event.getName() + "." + event.getType());
-        }
-
-        @Override
-        public void serviceResolved(ServiceEvent event) {
-            System.out.println("Service resolved: " + event.getInfo());
-        }
-    }
-
+public class OpenJmDNS {
     /**
      * @param args
      *            the command line arguments
      */
     public static void main(String[] args) {
         try {
-
-            // Activate these lines to see log messages of JmDNS
-            boolean log = false;
+            /* Activate these lines to see log messages of JmDNS */
+            boolean log = true;
             if (log) {
-                Logger logger = LoggerFactory.getLogger(JmDNS.class.getName());
                 ConsoleHandler handler = new ConsoleHandler();
-                logger.addHandler(handler);
-                logger.setLevel(Level.FINER);
-                handler.setLevel(Level.FINER);
+                handler.setLevel(Level.FINEST);
+                for (Enumeration<String> enumerator = LogManager.getLogManager().getLoggerNames(); enumerator.hasMoreElements();) {
+                    String loggerName = enumerator.nextElement();
+                    Logger logger = LoggerFactory.getLogger(loggerName);
+                    logger.addHandler(handler);
+                    logger.setLevel(Level.FINEST);
+                }
             }
 
-            final JmDNS jmdns = JmDNS.create();
-            jmdns.addServiceListener("_http._tcp.local.", new SampleListener());
+            JmDNS jmdns = JmDNS.create();
 
             System.out.println("Press q and Enter, to quit");
             int b;
@@ -80,7 +61,6 @@ public class DiscoverServices {
                 /* Stub */
             }
             jmdns.close();
-            System.out.println("Done");
         } catch (IOException e) {
             e.printStackTrace();
         }
