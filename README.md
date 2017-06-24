@@ -14,6 +14,9 @@ rickblair@mac.com
 Kai Kreuzer
 kai@openhab.org
 
+Angsuman Chakraborty
+angsuman@taragana.com
+
 # JmDNS
 
 This is an implemenation of multi-cast DNS in Java. It
