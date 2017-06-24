@@ -28,8 +28,9 @@ Copy zip from github or clone the repository
 
 Run the following in the directory to create jar file (no dependencies):
 
+```bash
 ant jar
-
+```
 
 ## Sample Code for Service Registration
 
