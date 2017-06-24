@@ -1,16 +1,21 @@
-package org.slf4j;
+// Licensed under Apache License version 2.0
+package org.slf4j; // Mimicked slf4j package structure to avoid changing existing codebase or usage
 
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Handler;
-
+/** 
+ * Replacement for slf4j Logger. Uses java.util.logging framework.
+ */
 public class Logger {
 	private static java.util.logging.Logger logger;
+	// DO NOT CHANGE
+	public Logger(java.util.logging.Logger l) { logger = l; }
 	
-	public Logger(java.util.logging.Logger l) {
-		logger = l;
-	}
-	
+	// DO NOT CHANGE
+	/**
+	 * Clean room implementation of slf4j delayed evaluation of Strings
+	 */
 	public void log(Level level, String message, Object ... args) {
 		if(logger.isLoggable(level)) {
 			int aL = args.length;
@@ -25,6 +30,7 @@ public class Logger {
 		}
 	}
 	
+	// Add additional mapping methods below
 	public void addHandler(Handler handler) { logger.addHandler(handler); }
 	
 	public boolean isInfoEnabled()  { return logger.isLoggable(Level.INFO); }

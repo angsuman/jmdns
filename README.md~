@@ -23,13 +23,6 @@ This is an implemenation of multi-cast DNS in Java. It
 supports service discovery and service registration. It is fully
 interoperable with Apple's Bonjour. 
 
-## How to create jar
-Copy zip from github or clone the repository
-
-Run the following in the directory to create jar file (no dependencies)
-ant jar
-
-
 ## Sample Code for Service Registration
 
 ```java
