@@ -26,9 +26,14 @@ interoperable with Apple's Bonjour.
 ## How to create jar
 Copy zip from github or clone the repository
 
+```bash
+git clone https://github.com/angsuman/jmdns.git
+```
+
 Run the following in the directory to create jar file (no dependencies):
 
 ```bash
+cd jmdns
 ant jar
 ```
 
